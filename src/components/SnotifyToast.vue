@@ -36,7 +36,7 @@
   import SnotifyButton from './SnotifyButton.vue';
   import {SnotifyStyle} from '../enums';
 
-  export default Vue.extend({
+  export default {
     props: ['toastData'],
     components: {
       SnotifyPrompt,
@@ -164,6 +164,6 @@
       cancelAnimationFrame(this.animationFrame);
       this.toast.eventEmitter.$emit('destroyed');
     }
-  });
+  };
 
 </script>

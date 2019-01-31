@@ -16,7 +16,7 @@
   import {SnotifyEvent} from '../types';
   import Toast from './SnotifyToast.vue';
 
-  export default Vue.extend({
+  export default {
     components: {
       Toast
     },
@@ -144,5 +144,5 @@
         this.setOptions(toasts);
       });
     }
-  })
+  }
 </script>

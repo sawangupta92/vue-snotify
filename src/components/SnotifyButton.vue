@@ -13,14 +13,14 @@
 <script lang="ts">
   import Vue from 'vue';
 
-  export default Vue.extend({
+  export default {
     props: ['toast'],
     methods: {
       remove() {
         this.$snotify.remove(this.toast.id);
       }
     }
-  })
+  }
 </script>
 
 <style lang="scss">

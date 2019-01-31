@@ -570,29 +570,17 @@ var __vue_render__$2 = function() {
             },
             [
               _vm.toast.title
-                ? _c("div", { staticClass: "snotifyToast__title" }, [
-                    _vm._v(
-                      _vm._s(
-                        _vm._f("truncate")(
-                          _vm.toast.title,
-                          _vm.toast.config.titleMaxLength
-                        )
-                      )
-                    )
-                  ])
+                ? _c("div", {
+                    staticClass: "snotifyToast__title",
+                    domProps: { innerHTML: _vm._s(_vm.toast.title) }
+                  })
                 : _vm._e(),
               _vm._v(" "),
               _vm.toast.body
-                ? _c("div", { staticClass: "snotifyToast__body" }, [
-                    _vm._v(
-                      _vm._s(
-                        _vm._f("truncate")(
-                          _vm.toast.body,
-                          _vm.toast.config.bodyMaxLength
-                        )
-                      )
-                    )
-                  ])
+                ? _c("div", {
+                    staticClass: "snotifyToast__body",
+                    domProps: { innerHTML: _vm._s(_vm.toast.body) }
+                  })
                 : _vm._e(),
               _vm._v(" "),
               _vm.toast.config.type === _vm.state.promptType

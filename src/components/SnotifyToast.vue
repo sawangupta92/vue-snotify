@@ -16,8 +16,10 @@
       <span class="snotifyToast__progressBar__percentage" :style="{'width': (state.progress * 100) + '%'}"></span>
     </div>
     <div class="snotifyToast__inner" v-if="!toast.config.html" :class="{'snotifyToast__noIcon': toast.config.icon === false}">
-      <div class="snotifyToast__title" v-if="toast.title">{{toast.title | truncate(toast.config.titleMaxLength)}}</div>
-      <div class="snotifyToast__body" v-if="toast.body">{{toast.body | truncate(toast.config.bodyMaxLength)}}</div>
+      <!-- Remove {{toast.title | truncate(toast.config.titleMaxLength)}} -->
+      <div class="snotifyToast__title" v-if="toast.title" v-html='toast.title'></div>
+      <!-- Removing toast.body | truncate(toast.config.bodyMaxLength) -->
+      <div class="snotifyToast__body" v-if="toast.body" v-html='toast.body'></div>
       <snotify-prompt v-if="toast.config.type === state.promptType" :toast="toast"/>
       <div v-if="typeof toast.config.icon === 'undefined'" :class="['snotify-icon', 'snotify-icon--' + toast.config.type]"></div>
       <div v-else-if="toast.config.icon !== false">

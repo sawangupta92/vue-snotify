@@ -20,6 +20,7 @@ export const ToastDefaults = {
     pauseOnHover: true,
     bodyMaxLength: 150,
     titleMaxLength: 16,
+    progressBarDirection: 'ltr',
     backdrop: -1,
     icon: undefined,
     html: null,

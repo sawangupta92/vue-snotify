@@ -11,29 +11,17 @@
             '-webkit-transition': toast.config.animation.time + 'ms',
             transition: toast.config.animation.time + 'ms'
           }"
-    @click="onClick" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+    @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div v-once>
       {{ animationEnd() }}
     </div>
     <template v-if="!toast.config.component.name">
-      <div
-        class="snotifyToast__inner"
-        v-if="!toast.config.html"
-        :class="{'snotifyToast__noIcon': toast.config.icon === false}"
-      >
-        <div
-          class="snotifyToast__title"
-          v-if="toast.title" v-html='toast.title'
-        ></div>
-        <div
-          class="snotifyToast__body"
-          v-if="toast.body" v-html="toast.body"
-        ></div>
+      <div class="snotifyToast__inner" v-if="!toast.config.html" :class="{'snotifyToast__noIcon': toast.config.icon === false}">
+        <div @click="onClick">X</div>
+        <div class="snotifyToast__title" v-if="toast.title" v-html='toast.title'></div>
+        <div class="snotifyToast__body" v-if="toast.body" v-html="toast.body"></div>
         <snotify-prompt v-if="toast.config.type === state.promptType" :toast="toast"/>
-        <div
-          v-if="typeof toast.config.icon === 'undefined'"
-          :class="['snotify-icon', 'snotify-icon--' + toast.config.type]"
-        ></div>
+        <div v-if="typeof toast.config.icon === 'undefined'" :class="['snotify-icon', 'snotify-icon--' + toast.config.type]"></div>
         <div v-else-if="toast.config.icon !== false">
           <img class="snotify-icon" :src="toast.config.icon">
         </div>
@@ -45,7 +33,7 @@
     </template>
     <snotify-button v-if="toast.config.buttons" :toast="toast" />
     <div class="snotifyToast__progressBar" v-if="toast.config.showProgressBar && toast.config.timeout > 0">
-      <span class="snotifyToast__progressBar__percentage" :style="{'width': (state.progress * 100) + '%'}"></span>
+      <span class="snotifyToast__progressBar__percentage" :style="{'width': (progressPercentage) + '%'}"></span>
     </div>
   </div>
 
@@ -160,6 +148,16 @@
           setTimeout(() => this.$snotify.remove(this.toast.id, true), this.toast.config.animation.time / 2);
         }, this.toast.config.animation.time / 2);
       },
+    },
+
+    computed: {
+      progressPercentage() {
+        if(this.toast.config.progressBarDirection == 'ltr') {
+          return (this.state.progress * 100);
+        } else {
+          return (100 - (this.state.progress * 100));
+        }
+      }
     },
 
     created () {

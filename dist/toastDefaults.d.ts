@@ -19,6 +19,7 @@ export declare const ToastDefaults: {
         pauseOnHover: boolean;
         bodyMaxLength: number;
         titleMaxLength: number;
+        progressBarDirection: string;
         backdrop: number;
         icon: any;
         html: any;

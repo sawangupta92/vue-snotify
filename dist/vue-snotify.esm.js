@@ -489,6 +489,16 @@ var script$2 = {
             }, this.toast.config.animation.time / 2);
         },
     },
+    computed: {
+        progressPercentage: function () {
+            if (this.toast.config.progressBarDirection == 'ltr') {
+                return (this.state.progress * 100);
+            }
+            else {
+                return (100 - (this.state.progress * 100));
+            }
+        }
+    },
     created: function () {
         var _this = this;
         this.$snotify.emitter.$on('toastChanged', function (toast) {
@@ -550,11 +560,7 @@ var __vue_render__$2 = function() {
         "-webkit-transition": _vm.toast.config.animation.time + "ms",
         transition: _vm.toast.config.animation.time + "ms"
       },
-      on: {
-        click: _vm.onClick,
-        mouseenter: _vm.onMouseEnter,
-        mouseleave: _vm.onMouseLeave
-      }
+      on: { mouseenter: _vm.onMouseEnter, mouseleave: _vm.onMouseLeave }
     },
     [
       _vm._m(0),
@@ -571,6 +577,8 @@ var __vue_render__$2 = function() {
                     }
                   },
                   [
+                    _c("div", { on: { click: _vm.onClick } }, [_vm._v("X")]),
+                    _vm._v(" "),
                     _vm.toast.title
                       ? _c("div", {
                           staticClass: "snotifyToast__title",
@@ -627,7 +635,7 @@ var __vue_render__$2 = function() {
         ? _c("div", { staticClass: "snotifyToast__progressBar" }, [
             _c("span", {
               staticClass: "snotifyToast__progressBar__percentage",
-              style: { width: _vm.state.progress * 100 + "%" }
+              style: { width: _vm.progressPercentage + "%" }
             })
           ])
         : _vm._e()
@@ -1142,6 +1150,7 @@ var ToastDefaults = {
         pauseOnHover: true,
         bodyMaxLength: 150,
         titleMaxLength: 16,
+        progressBarDirection: 'ltr',
         backdrop: -1,
         icon: undefined,
         html: null,

@@ -11,9 +11,9 @@
             '-webkit-transition': toast.config.animation.time + 'ms',
             transition: toast.config.animation.time + 'ms'
           }"
-    @click="onClick" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" @animationend="onExitTransitionEnd">
-    <div class="snotifyToast__progressBar" v-if="toast.config.showProgressBar && toast.config.timeout > 0">
-      <span class="snotifyToast__progressBar__percentage" :style="{'width': (state.progress * 100) + '%'}"></span>
+    @click="onClick" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+    <div v-once>
+      {{ animationEnd() }}
     </div>
     <template v-if="!toast.config.component.name">
       <div
@@ -23,12 +23,12 @@
       >
         <div
           class="snotifyToast__title"
-          v-if="toast.title"
-        >{{toast.title | truncate(toast.config.titleMaxLength)}}</div>
+          v-if="toast.title" v-html='toast.title'
+        ></div>
         <div
           class="snotifyToast__body"
-          v-if="toast.body"
-        >{{toast.body | truncate(toast.config.bodyMaxLength)}}</div>
+          v-if="toast.body" v-html="toast.body"
+        ></div>
         <snotify-prompt v-if="toast.config.type === state.promptType" :toast="toast"/>
         <div
           v-if="typeof toast.config.icon === 'undefined'"
@@ -44,6 +44,9 @@
       <component :is="toast.config.component.name" :data="toast.config.component.data"></component>
     </template>
     <snotify-button v-if="toast.config.buttons" :toast="toast" />
+    <div class="snotifyToast__progressBar" v-if="toast.config.showProgressBar && toast.config.timeout > 0">
+      <span class="snotifyToast__progressBar__percentage" :style="{'width': (state.progress * 100) + '%'}"></span>
+    </div>
   </div>
 
 </template>
@@ -81,6 +84,12 @@
         if (this.toast.config.timeout > 0) {
           this.startTimeout(0);
         }
+      },
+      animationEnd() {
+        var _this = this;
+        setTimeout(function() {
+          _this.onExitTransitionEnd()
+        }, _this.toast.config.animation.time)
       },
       onClick () {
         this.toast.eventEmitter.$emit('click');

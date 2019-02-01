@@ -408,6 +408,12 @@ var script$2 = {
                 this.startTimeout(0);
             }
         },
+        animationEnd: function () {
+            var _this = this;
+            setTimeout(function () {
+                _this.onExitTransitionEnd();
+            }, _this.toast.config.animation.time);
+        },
         onClick: function () {
             this.toast.eventEmitter.$emit('click');
             if (this.toast.config.closeOnClick) {
@@ -547,11 +553,76 @@ var __vue_render__$2 = function() {
       on: {
         click: _vm.onClick,
         mouseenter: _vm.onMouseEnter,
-        mouseleave: _vm.onMouseLeave,
-        animationend: _vm.onExitTransitionEnd
+        mouseleave: _vm.onMouseLeave
       }
     },
     [
+      _vm._m(0),
+      _vm._v(" "),
+      !_vm.toast.config.component.name
+        ? [
+            !_vm.toast.config.html
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "snotifyToast__inner",
+                    class: {
+                      snotifyToast__noIcon: _vm.toast.config.icon === false
+                    }
+                  },
+                  [
+                    _vm.toast.title
+                      ? _c("div", {
+                          staticClass: "snotifyToast__title",
+                          domProps: { innerHTML: _vm._s(_vm.toast.title) }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.toast.body
+                      ? _c("div", {
+                          staticClass: "snotifyToast__body",
+                          domProps: { innerHTML: _vm._s(_vm.toast.body) }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.toast.config.type === _vm.state.promptType
+                      ? _c("snotify-prompt", { attrs: { toast: _vm.toast } })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    typeof _vm.toast.config.icon === "undefined"
+                      ? _c("div", {
+                          class: [
+                            "snotify-icon",
+                            "snotify-icon--" + _vm.toast.config.type
+                          ]
+                        })
+                      : _vm.toast.config.icon !== false
+                        ? _c("div", [
+                            _c("img", {
+                              staticClass: "snotify-icon",
+                              attrs: { src: _vm.toast.config.icon }
+                            })
+                          ])
+                        : _vm._e()
+                  ],
+                  1
+                )
+              : _c("div", {
+                  staticClass: "snotifyToast__inner",
+                  domProps: { innerHTML: _vm._s(_vm.toast.config.html) }
+                })
+          ]
+        : [
+            _c(_vm.toast.config.component.name, {
+              tag: "component",
+              attrs: { data: _vm.toast.config.component.data }
+            })
+          ],
+      _vm._v(" "),
+      _vm.toast.config.buttons
+        ? _c("snotify-button", { attrs: { toast: _vm.toast } })
+        : _vm._e(),
+      _vm._v(" "),
       _vm.toast.config.showProgressBar && _vm.toast.config.timeout > 0
         ? _c("div", { staticClass: "snotifyToast__progressBar" }, [
             _c("span", {
@@ -559,65 +630,19 @@ var __vue_render__$2 = function() {
               style: { width: _vm.state.progress * 100 + "%" }
             })
           ])
-        : _vm._e(),
-      _vm._v(" "),
-      !_vm.toast.config.html
-        ? _c(
-            "div",
-            {
-              staticClass: "snotifyToast__inner",
-              class: { snotifyToast__noIcon: _vm.toast.config.icon === false }
-            },
-            [
-              _vm.toast.title
-                ? _c("div", {
-                    staticClass: "snotifyToast__title",
-                    domProps: { innerHTML: _vm._s(_vm.toast.title) }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.toast.body
-                ? _c("div", {
-                    staticClass: "snotifyToast__body",
-                    domProps: { innerHTML: _vm._s(_vm.toast.body) }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.toast.config.type === _vm.state.promptType
-                ? _c("snotify-prompt", { attrs: { toast: _vm.toast } })
-                : _vm._e(),
-              _vm._v(" "),
-              typeof _vm.toast.config.icon === "undefined"
-                ? _c("div", {
-                    class: [
-                      "snotify-icon",
-                      "snotify-icon--" + _vm.toast.config.type
-                    ]
-                  })
-                : _vm.toast.config.icon !== false
-                  ? _c("div", [
-                      _c("img", {
-                        staticClass: "snotify-icon",
-                        attrs: { src: _vm.toast.config.icon }
-                      })
-                    ])
-                  : _vm._e()
-            ],
-            1
-          )
-        : _c("div", {
-            staticClass: "snotifyToast__inner",
-            domProps: { innerHTML: _vm._s(_vm.toast.config.html) }
-          }),
-      _vm._v(" "),
-      _vm.toast.config.buttons
-        ? _c("snotify-button", { attrs: { toast: _vm.toast } })
         : _vm._e()
     ],
-    1
+    2
   )
 };
-var __vue_staticRenderFns__$2 = [];
+var __vue_staticRenderFns__$2 = [
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", [_vm._v("\n    " + _vm._s(_vm.animationEnd()) + "\n  ")])
+  }
+];
 __vue_render__$2._withStripped = true;
 
   /* style */
@@ -1120,6 +1145,7 @@ var ToastDefaults = {
         backdrop: -1,
         icon: undefined,
         html: null,
+        component: { name: '', data: null },
         position: SnotifyPosition.rightBottom,
         animation: { enter: 'fadeIn', exit: 'fadeOut', time: 400 }
     },

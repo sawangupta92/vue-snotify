@@ -22,6 +22,10 @@ export declare const ToastDefaults: {
         backdrop: number;
         icon: any;
         html: any;
+        component: {
+            name: string;
+            data: any;
+        };
         position: SnotifyPosition;
         animation: {
             enter: string;

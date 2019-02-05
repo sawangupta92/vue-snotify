@@ -23,7 +23,7 @@ export const ToastDefaults = {
     backdrop: -1,
     icon: undefined,
     html: null,
-    component: {name : '', data : null},
+    component: {name : '', data : null, customClass : ''},
     position: SnotifyPosition.rightBottom,
     animation: {enter: 'fadeIn', exit: 'fadeOut', time: 400}
   },

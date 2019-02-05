@@ -17,7 +17,7 @@
     </div>
     <template v-if="!toast.config.component.name">
       <div class="snotifyToast__inner" v-if="!toast.config.html" :class="{'snotifyToast__noIcon': toast.config.icon === false}">
-        <div @click="onClick">X</div>
+        <div @click="onClick" class='si-toast-close'>X</div>
         <div class="snotifyToast__title" v-if="toast.title" v-html='toast.title'></div>
         <div class="snotifyToast__body" v-if="toast.body" v-html="toast.body"></div>
         <snotify-prompt v-if="toast.config.type === state.promptType" :toast="toast"/>

@@ -596,7 +596,14 @@ var __vue_render__$2 = function() {
                     }
                   },
                   [
-                    _c("div", { on: { click: _vm.onClick } }, [_vm._v("X")]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "si-toast-close",
+                        on: { click: _vm.onClick }
+                      },
+                      [_vm._v("X")]
+                    ),
                     _vm._v(" "),
                     _vm.toast.title
                       ? _c("div", {

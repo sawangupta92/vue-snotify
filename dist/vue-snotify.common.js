@@ -566,6 +566,7 @@ var __vue_render__$2 = function() {
       staticClass: "snotifyToast animated",
       class: [
         "snotify-" + _vm.toast.config.type,
+        _vm.toast.config.component.customClass,
         _vm.state.animation,
         _vm.toast.valid === undefined
           ? ""
@@ -1180,7 +1181,7 @@ var ToastDefaults = {
         backdrop: -1,
         icon: undefined,
         html: null,
-        component: { name: '', data: null },
+        component: { name: '', data: null, customClass: '' },
         position: exports.SnotifyPosition.rightBottom,
         animation: { enter: 'fadeIn', exit: 'fadeOut', time: 400 }
     },

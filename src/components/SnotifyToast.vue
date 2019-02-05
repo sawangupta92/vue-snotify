@@ -1,7 +1,7 @@
 <template>
   <div
     class="snotifyToast animated"
-    :class="['snotify-' + toast.config.type,
+    :class="['snotify-' + toast.config.type, toast.config.component.customClass,
             state.animation,
             toast.valid === undefined ? '' : (toast.valid ? 'snotifyToast--valid' : 'snotifyToast--invalid')
           ]"

@@ -26,6 +26,7 @@ export declare const ToastDefaults: {
         component: {
             name: string;
             data: any;
+            customClass: string;
         };
         position: SnotifyPosition;
         animation: {

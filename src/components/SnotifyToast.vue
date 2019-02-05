@@ -119,7 +119,12 @@
           this.animationFrame = requestAnimationFrame((timestamp) => {
             const runtime = timestamp + startTime - start;
             const progress = Math.min(runtime / this.toast.config.timeout, 1);
-            if (this.state.paused) {
+            const notificationIndex = this.$snotify.notifications.findIndex((notification) => {
+              return notification.id == this.toastData.id
+            });
+            if (notificationIndex != this.$snotify.notifications.length - 1) {
+              cancelAnimationFrame(this.animationFrame);
+            } else if (this.state.paused) {
               cancelAnimationFrame(this.animationFrame);
             } else if (runtime < this.toast.config.timeout) {
               this.state.progress = progress;
@@ -166,6 +171,11 @@
           this.initToast();
         }
       });
+
+      this.toast.eventEmitter.$on('resume-animation', (toast) => {
+        this.startTimeout(this.toast.config.timeout * this.state.progress);
+      });
+
       this.$snotify.emitter.$on('remove', (id) => {
         if (this.toast.id === id) {
           this.onRemove();
@@ -188,6 +198,9 @@
     destroyed () {
       cancelAnimationFrame(this.animationFrame);
       this.toast.eventEmitter.$emit('destroyed');
+      for (let notification of this.$snotify.notifications) {
+        notification.eventEmitter.$emit('resume-animation')
+      }
     }
   };
 

@@ -462,7 +462,13 @@ var script$2 = {
                 _this.animationFrame = requestAnimationFrame(function (timestamp) {
                     var runtime = timestamp + startTime - start;
                     var progress = Math.min(runtime / _this.toast.config.timeout, 1);
-                    if (_this.state.paused) {
+                    var notificationIndex = _this.$snotify.notifications.findIndex(function (notification) {
+                        return notification.id == _this.toastData.id;
+                    });
+                    if (notificationIndex != _this.$snotify.notifications.length - 1) {
+                        cancelAnimationFrame(_this.animationFrame);
+                    }
+                    else if (_this.state.paused) {
                         cancelAnimationFrame(_this.animationFrame);
                     }
                     else if (runtime < _this.toast.config.timeout) {
@@ -512,6 +518,9 @@ var script$2 = {
                 _this.initToast();
             }
         });
+        this.toast.eventEmitter.$on('resume-animation', function (toast) {
+            _this.startTimeout(_this.toast.config.timeout * _this.state.progress);
+        });
         this.$snotify.emitter.$on('remove', function (id) {
             if (_this.toast.id === id) {
                 _this.onRemove();
@@ -535,6 +544,10 @@ var script$2 = {
     destroyed: function () {
         cancelAnimationFrame(this.animationFrame);
         this.toast.eventEmitter.$emit('destroyed');
+        for (var _i = 0, _a = this.$snotify.notifications; _i < _a.length; _i++) {
+            var notification = _a[_i];
+            notification.eventEmitter.$emit('resume-animation');
+        }
     }
 };
 

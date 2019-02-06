@@ -115,7 +115,7 @@ __vue_render__._withStripped = true;
     const component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     {
-      component.__file = "/Users/sawan/Documents/vue-snotify/src/components/SnotifyPrompt.vue";
+      component.__file = "/Users/sparevinmac/Documents/WorkSource/Projects/vue-snotify/src/components/SnotifyPrompt.vue";
     }
 
     if (!component.render) {
@@ -251,7 +251,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-4af624de_0", { source: "\n/*# sourceMappingURL=SnotifyButton.vue.map */", map: {"version":3,"sources":["SnotifyButton.vue"],"names":[],"mappings":";AACA,6CAA6C","file":"SnotifyButton.vue"}, media: undefined });
+    inject("data-v-02a750e4_0", { source: "\n/*# sourceMappingURL=SnotifyButton.vue.map */", map: {"version":3,"sources":["SnotifyButton.vue"],"names":[],"mappings":";AACA,6CAA6C","file":"SnotifyButton.vue"}, media: undefined });
 
   };
   /* scoped */
@@ -269,7 +269,7 @@ __vue_render__$1._withStripped = true;
     const component = (typeof script === 'function' ? script.options : script) || {};
 
     {
-      component.__file = "/Users/sawan/Documents/vue-snotify/src/components/SnotifyButton.vue";
+      component.__file = "/Users/sparevinmac/Documents/WorkSource/Projects/vue-snotify/src/components/SnotifyButton.vue";
     }
 
     if (!component.render) {
@@ -591,14 +591,10 @@ var __vue_render__$2 = function() {
                     }
                   },
                   [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "si-toast-close",
-                        on: { click: _vm.onClick }
-                      },
-                      [_vm._v("X")]
-                    ),
+                    _c("div", {
+                      staticClass: "si-toast-close",
+                      on: { click: _vm.onClick }
+                    }),
                     _vm._v(" "),
                     _vm.toast.title
                       ? _c("div", {
@@ -642,6 +638,11 @@ var __vue_render__$2 = function() {
                 })
           ]
         : [
+            _c("div", {
+              staticClass: "si-toast-close",
+              on: { click: _vm.onClick }
+            }),
+            _vm._v(" "),
             _c(_vm.toast.config.component.name, {
               tag: "component",
               attrs: { data: _vm.toast.config.component.data }
@@ -691,7 +692,7 @@ __vue_render__$2._withStripped = true;
     const component = (typeof script === 'function' ? script.options : script) || {};
 
     {
-      component.__file = "/Users/sawan/Documents/vue-snotify/src/components/SnotifyToast.vue";
+      component.__file = "/Users/sparevinmac/Documents/WorkSource/Projects/vue-snotify/src/components/SnotifyToast.vue";
     }
 
     if (!component.render) {
@@ -961,7 +962,7 @@ __vue_render__$3._withStripped = true;
     const component = (typeof script === 'function' ? script.options : script) || {};
 
     {
-      component.__file = "/Users/sawan/Documents/vue-snotify/src/components/Snotify.vue";
+      component.__file = "/Users/sparevinmac/Documents/WorkSource/Projects/vue-snotify/src/components/Snotify.vue";
     }
 
     if (!component.render) {

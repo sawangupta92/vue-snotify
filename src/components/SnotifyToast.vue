@@ -123,8 +123,23 @@
             const notificationIndex = this.$snotify.notifications.findIndex((notification) => {
               return notification.id == this.toastData.id
             });
-            if (notificationIndex != this.$snotify.notifications.length - 1) {
-              cancelAnimationFrame(this.animationFrame);
+            if (!this.toastData.config.timeout) {
+              return true;
+            }
+
+            if ((notificationIndex != this.$snotify.notifications.length - 1)) {
+              if (this.$snotify.notifications[this.$snotify.notifications.length - 1].config.timeout) {
+                cancelAnimationFrame(this.animationFrame);
+              } else if (notificationIndex != (this.$snotify.notifications.length - 2)) {
+                cancelAnimationFrame(this.animationFrame);
+              } else if (runtime < this.toast.config.timeout) {
+                this.state.progress = progress;
+                calculate();
+              } else {
+                this.state.progress = 1;
+                cancelAnimationFrame(this.animationFrame);
+                this.$snotify.emitter.$emit('remove', this.toast.id);
+              }
             } else if (this.state.paused) {
               cancelAnimationFrame(this.animationFrame);
             } else if (runtime < this.toast.config.timeout) {

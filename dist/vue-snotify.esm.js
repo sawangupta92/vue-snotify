@@ -115,7 +115,7 @@ __vue_render__._withStripped = true;
     const component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     {
-      component.__file = "/Users/sparevinmac/Documents/WorkSource/Projects/vue-snotify/src/components/SnotifyPrompt.vue";
+      component.__file = "/Users/sawan/Documents/vue-snotify/src/components/SnotifyPrompt.vue";
     }
 
     if (!component.render) {
@@ -251,7 +251,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-02a750e4_0", { source: "\n/*# sourceMappingURL=SnotifyButton.vue.map */", map: {"version":3,"sources":["SnotifyButton.vue"],"names":[],"mappings":";AACA,6CAA6C","file":"SnotifyButton.vue"}, media: undefined });
+    inject("data-v-4af624de_0", { source: "\n/*# sourceMappingURL=SnotifyButton.vue.map */", map: {"version":3,"sources":["SnotifyButton.vue"],"names":[],"mappings":";AACA,6CAA6C","file":"SnotifyButton.vue"}, media: undefined });
 
   };
   /* scoped */
@@ -269,7 +269,7 @@ __vue_render__$1._withStripped = true;
     const component = (typeof script === 'function' ? script.options : script) || {};
 
     {
-      component.__file = "/Users/sparevinmac/Documents/WorkSource/Projects/vue-snotify/src/components/SnotifyButton.vue";
+      component.__file = "/Users/sawan/Documents/vue-snotify/src/components/SnotifyButton.vue";
     }
 
     if (!component.render) {
@@ -459,8 +459,25 @@ var script$2 = {
                     var notificationIndex = _this.$snotify.notifications.findIndex(function (notification) {
                         return notification.id == _this.toastData.id;
                     });
-                    if (notificationIndex != _this.$snotify.notifications.length - 1) {
-                        cancelAnimationFrame(_this.animationFrame);
+                    if (!_this.toastData.config.timeout) {
+                        return true;
+                    }
+                    if ((notificationIndex != _this.$snotify.notifications.length - 1)) {
+                        if (_this.$snotify.notifications[_this.$snotify.notifications.length - 1].config.timeout) {
+                            cancelAnimationFrame(_this.animationFrame);
+                        }
+                        else if (notificationIndex != (_this.$snotify.notifications.length - 2)) {
+                            cancelAnimationFrame(_this.animationFrame);
+                        }
+                        else if (runtime < _this.toast.config.timeout) {
+                            _this.state.progress = progress;
+                            calculate();
+                        }
+                        else {
+                            _this.state.progress = 1;
+                            cancelAnimationFrame(_this.animationFrame);
+                            _this.$snotify.emitter.$emit('remove', _this.toast.id);
+                        }
                     }
                     else if (_this.state.paused) {
                         cancelAnimationFrame(_this.animationFrame);
@@ -692,7 +709,7 @@ __vue_render__$2._withStripped = true;
     const component = (typeof script === 'function' ? script.options : script) || {};
 
     {
-      component.__file = "/Users/sparevinmac/Documents/WorkSource/Projects/vue-snotify/src/components/SnotifyToast.vue";
+      component.__file = "/Users/sawan/Documents/vue-snotify/src/components/SnotifyToast.vue";
     }
 
     if (!component.render) {
@@ -962,7 +979,7 @@ __vue_render__$3._withStripped = true;
     const component = (typeof script === 'function' ? script.options : script) || {};
 
     {
-      component.__file = "/Users/sparevinmac/Documents/WorkSource/Projects/vue-snotify/src/components/Snotify.vue";
+      component.__file = "/Users/sawan/Documents/vue-snotify/src/components/Snotify.vue";
     }
 
     if (!component.render) {
